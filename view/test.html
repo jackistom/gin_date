@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实时数据监控</title>
+    <script type="text/javascript">
+
+        var processID = self.setInterval("loadXMLDoc()",1000);
+
+        function loadXMLDoc()
+
+        {
+
+            var xmlhttp;
+
+            if (window.XMLHttpRequest)
+
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+
+                xmlhttp=new XMLHttpRequest();
+
+            }
+
+            else
+
+            {// code for IE6, IE5
+
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+
+            }
+
+            xmlhttp.onreadystatechange=function()
+
+            {
+
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+
+                {
+
+                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+
+                }
+
+            }
+
+
+
+            xmlhttp.open("GET","/get",true);
+
+            xmlhttp.send();
+
+
+
+        }
+
+        function closeConnection() {
+
+            window.clearInterval(processID);
+
+        }
+
+    </script>
+    <style>
+        .button1 {
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            padding: 16px 32px;
+            text-align: center;
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+            border-radius:5px;
+        }
+        .button1:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body background="https://s2.ax1x.com/2020/03/09/89i9Zn.md.jpg">
+
+
+
+
+<h2></h2>
+
+<button type="button" onclick="closeConnection()" class="button1">锁定数据</button>
+
+<div id="myDiv" class="button1">设备尚未上传数据!!!</div>
+
+
+
+</body>
+
+</html>
+
+
